@@ -23,4 +23,20 @@ public class UserServiceImpl implements UserService {
         List<UserEo> userEos = userMapper.selectUser(userEo);
         return userEos;
     }
+
+    public String insertUser(UserEo userEo) {
+        if (userEo == null) {
+            return "error";
+        }
+        userMapper.insertUser(userEo);
+        return "success";
+    }
+
+    public String activationUser(UserEo userEo) {
+        if (userEo != null) {
+            userMapper.updateUser(userEo);
+            return "success";
+        }
+        return "error";
+    }
 }

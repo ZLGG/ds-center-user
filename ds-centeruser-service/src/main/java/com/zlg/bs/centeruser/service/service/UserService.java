@@ -6,5 +6,10 @@ import java.util.List;
 
 public interface UserService {
     UserEo selectUserById(int id);
+
     List<UserEo> selectUser(UserEo userEo);
+
+    String insertUser(UserEo userEo);
+
+    String activationUser(UserEo userEo);
 }

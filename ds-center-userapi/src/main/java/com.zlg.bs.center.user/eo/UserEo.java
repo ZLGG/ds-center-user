@@ -12,10 +12,10 @@ import java.sql.Time;
 @Table
 public class UserEo implements Serializable {
     private Long id;
+    @Column(name = "account_id")
     private Long accountId;
     @Column(name = "nick_name")
     private String nickName;
-    @Column(name = "account_id")
     private String mobile;
     private String email;
     private String password;

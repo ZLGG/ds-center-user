@@ -22,7 +22,7 @@ public interface UserMapper {
             "</script>")
     List<UserEo> selectUser(@Param("eo") UserEo eo);
 
-    @Insert("insert into mc_account (account_id , nick_name , mobile ,email , password , create_time) values (#{eo.accountId},#{eo.nickName},#{eo.mobile},#{eo.email},#{eo.password},now()})")
+    @Insert("insert into mc_account (account_id , nick_name , mobile ,email , password , create_time) values (#{eo.accountId},#{eo.nickName},#{eo.mobile},#{eo.email},#{eo.password},now())")
     void insertUser(@Param("eo") UserEo eo);
 
     @Update("update mc_account set" +
