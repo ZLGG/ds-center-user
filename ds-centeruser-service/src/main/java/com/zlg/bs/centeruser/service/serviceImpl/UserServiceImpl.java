@@ -1,9 +1,11 @@
 package com.zlg.bs.centeruser.service.serviceImpl;
 
 import com.zlg.bs.center.user.eo.UserEo;
+import com.zlg.bs.centeruser.service.exception.UserException;
 import com.zlg.bs.centeruser.service.mapper.UserMapper;
 import com.zlg.bs.centeruser.service.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,24 +21,38 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserEo> selectUser(UserEo userEo) {
-        userEo.setMobile("17633901170");
         List<UserEo> userEos = userMapper.selectUser(userEo);
         return userEos;
     }
 
-    public String insertUser(UserEo userEo) {
-        if (userEo == null) {
-            return "error";
+    public UserEo insertUser(UserEo userEo) {
+        if (userEo != null) {
+            userMapper.insertUser(userEo);
+            List<UserEo> userEos = userMapper.selectUser(userEo);
+            if (userEos != null && userEos.size() == 1) {
+                UserEo userEo1 = userEos.get(0);
+                return userEo1;
+            }
         }
-        userMapper.insertUser(userEo);
-        return "success";
+        return null;
     }
 
-    public String activationUser(UserEo userEo) {
+    public String activationUser(UserEo userEo) throws Exception{
         if (userEo != null) {
-            userMapper.updateUser(userEo);
+            try {
+                userMapper.updateUser(userEo);
+
+            } catch (Exception e) {
+                throw new UserException("激活失败");
+            }
             return "success";
         }
-        return "error";
+        throw new UserException("数据为空");
+    }
+
+    public void deleteUser(UserEo userEo) {
+        if (userEo != null&&userEo.getId()!=null) {
+            userMapper.deleteUser(userEo.getId());
+        }
     }
 }

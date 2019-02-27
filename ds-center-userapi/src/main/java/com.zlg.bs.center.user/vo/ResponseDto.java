@@ -1,13 +1,9 @@
-package com.zlg.bs.centeruser.service.vo;
+package com.zlg.bs.center.user.vo;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ResponseDto<T> implements Serializable {
-    private Logger logger = LoggerFactory.getLogger(ResponseDto.class);
     public static ResponseDto<Boolean> TRUE;
     public static ResponseDto<Boolean> FALSE;
     public static ResponseDto<Void> VOID;
@@ -43,6 +39,10 @@ public class ResponseDto<T> implements Serializable {
         this.result = result;
         this.data = data;
         this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+    public ResponseDto(String result, String errorMsg) {
+        this.result = result;
         this.errorMsg = errorMsg;
     }
 

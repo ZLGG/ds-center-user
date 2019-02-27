@@ -9,7 +9,9 @@ public interface UserService {
 
     List<UserEo> selectUser(UserEo userEo);
 
-    String insertUser(UserEo userEo);
+    UserEo insertUser(UserEo userEo);
 
-    String activationUser(UserEo userEo);
+    String activationUser(UserEo userEo)throws Exception;
+
+    void deleteUser(UserEo userEo);
 }

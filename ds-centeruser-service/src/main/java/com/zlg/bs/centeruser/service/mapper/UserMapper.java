@@ -18,6 +18,8 @@ public interface UserMapper {
             "<if test = 'eo.nickName != null'> and mc_account.nick_name Like concat('%',#{eo.nickName},'%') </if>" +
             "<if test = 'eo.mobile != null'> and mc_account.mobile = #{eo.mobile} </if>" +
             "<if test = 'eo.email != null'> and mc_account.email = #{eo.email} </if>" +
+            "<if test = 'eo.status != null'> and mc_account.status = #{eo.status}</if>" +
+            "<if test = 'eo.password != null'> and mc_account.password = #{eo.password}</if>" +
             "order by mc_account.id desc" +
             "</script>")
     List<UserEo> selectUser(@Param("eo") UserEo eo);
@@ -25,16 +27,18 @@ public interface UserMapper {
     @Insert("insert into mc_account (account_id , nick_name , mobile ,email , password , create_time) values (#{eo.accountId},#{eo.nickName},#{eo.mobile},#{eo.email},#{eo.password},now())")
     void insertUser(@Param("eo") UserEo eo);
 
-    @Update("update mc_account set" +
+    @Update("<script>" +
+            "update mc_account set" +
             "<if test = 'eo.nickName != null'> mc_account.nick_name = #{eo.nickName},</if>" +
             "<if test = 'eo.mobile != null '> mc_account.mobile = #{eo.mobile},</if>" +
             "<if test = 'eo.email != null '> mc_account.email = #{eo.email},</if>" +
             "<if test = 'eo.password != null'> mc_account.password = #{eo.password},</if>" +
             "<if test = 'eo.status != null'> mc_account.status = #{eo.status},</if>" +
             "mc_account.update_time = now()" +
-            "where mc_account.id = #{eo.id}")
+            "where mc_account.id = #{eo.id}" +
+            "</script>")
     void updateUser(@Param("eo") UserEo eo);
 
-    @Update("update mc_account set mc_account.dr = 1")
-    void deleteUser(int id);
+    @Update("update mc_account set mc_account.dr = 1 where mc_account.id = #{id}")
+    void deleteUser(Long id);
 }
