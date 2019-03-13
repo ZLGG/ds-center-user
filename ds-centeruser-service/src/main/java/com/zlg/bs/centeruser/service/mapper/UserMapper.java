@@ -19,12 +19,11 @@ public interface UserMapper {
             "<if test = 'eo.mobile != null'> and mc_account.mobile = #{eo.mobile} </if>" +
             "<if test = 'eo.email != null'> and mc_account.email = #{eo.email} </if>" +
             "<if test = 'eo.status != null'> and mc_account.status = #{eo.status}</if>" +
-            "<if test = 'eo.password != null'> and mc_account.password = #{eo.password}</if>" +
             "order by mc_account.id desc" +
             "</script>")
     List<UserEo> selectUser(@Param("eo") UserEo eo);
 
-    @Insert("insert into mc_account (account_id , nick_name , mobile ,email , password , create_time) values (#{eo.accountId},#{eo.nickName},#{eo.mobile},#{eo.email},#{eo.password},now())")
+    @Insert("insert into mc_account (account_id , nick_name , email , create_time) values (#{eo.accountId},#{eo.nickName},#{eo.email},now())")
     void insertUser(@Param("eo") UserEo eo);
 
     @Update("<script>" +
@@ -41,4 +40,7 @@ public interface UserMapper {
 
     @Update("update mc_account set mc_account.dr = 1 where mc_account.id = #{id}")
     void deleteUser(Long id);
+
+
+    
 }

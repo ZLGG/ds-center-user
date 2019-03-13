@@ -35,7 +35,7 @@ public class UserApiImpl implements UserApi {
 
     public ResponseDto<UserEo> insertUser(UserEo userEo) {
         UserEo userEo1 = new UserEo();
-        userEo1.setMobile(userEo.getMobile());
+        userEo1.setMobile(userEo.getEmail());
         List<UserEo> userEos = userService.selectUser(userEo1);
         if (userEos.size() == 0) {
             UserEo userEo2 = userService.insertUser(userEo);

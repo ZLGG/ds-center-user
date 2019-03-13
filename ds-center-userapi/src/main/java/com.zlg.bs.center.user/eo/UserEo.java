@@ -13,7 +13,7 @@ import java.sql.Time;
 public class UserEo implements Serializable {
     private Long id;
     @Column(name = "account_id")
-    private Long accountId;
+    private String accountId;
     @Column(name = "nick_name")
     private String nickName;
     private String mobile;

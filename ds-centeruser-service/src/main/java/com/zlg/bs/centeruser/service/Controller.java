@@ -35,7 +35,7 @@ public class Controller {
 
     @RequestMapping("/test3")
     public String test2(UserEo userEo) {
-        userEo.setAccountId(13454647879L);
+        userEo.setAccountId("1231");
         userService.insertUser(userEo);
         return "success";
     }
